@@ -1,0 +1,30 @@
+{% extends 'base.inc.html' %}
+
+{% block titulo %} - Artículos {% endblock titulo %}
+
+{% block contenido %}
+{% for articulo in articulo_list %}
+    <div class = "card">
+        <div class = "card-header">
+            <a href="{% url 'detalle_articulo' articulo.pk %}"><span class = "font-weight-bold">{{ articulo.titulo }}</span>&middot;</a>
+            <span class = "text-muted"> por {{ articulo.autor }} | {{ articulo.fecha }}</span>
+        </div>
+        <div class = "card-body">
+            {{ articulo.cuerpo }}
+        </div>
+        <div class = "card-footer text-center text-muted">
+            <a href="{% url 'editar_articulo' articulo.pk %}" class="btn">Editar</a> | <a href="{% url 'eliminar_articulo' articulo.pk %}" class="btn">Eliminar</a>
+        </div>
+        <div class = "card-footer">
+            {% for comentario in articulo.comentarios_set.all %}
+                <p>
+                    <span class = "font-weight-bold">
+                        {{ comentario.autor }} &middot;
+                    </span>
+                    {{ comentario }}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+{% endblock contenido %}

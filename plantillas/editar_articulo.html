@@ -1,0 +1,12 @@
+{% extends 'base.inc.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+<h1>Editar</h1>
+<form action="" method="post">{% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-success ml-2" type="submit">Guardar</button>
+    <button class="btn" type="button" onclick="window.location = `{% url 'lista_articulos' %}`">Cancelar</button>
+</form>
+{% endblock contenido %}
